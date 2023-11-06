@@ -51,6 +51,8 @@ def index(request):
 
 
 def post_detail(request, id):
+    if id not in [posts[id]['id'] for id in range(len(posts))]:
+        raise AssertionError(f'The requested post {id} is not found')
     template_name = 'blog/detail.html'
     context = {'post': posts[id]}
     return render(request, template_name, context)

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-posts: list[dict] = [
+posts = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
