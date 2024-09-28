@@ -46,7 +46,6 @@ posts = [
 
 def index(request):
     """Функция отображения постов на главной странице"""
-
     context = {'posts': reversed(posts)}
     return render(request, 'blog/index.html', context)
 
@@ -60,6 +59,5 @@ def post_detail(request, post_id):
 
 def category_posts(request, category_slug):
     """Функция отображения категорий постов"""
-    
     context = {'slug': category_slug}
     return render(request, 'blog/category.html', context)
