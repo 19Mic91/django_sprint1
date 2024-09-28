@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Остров отчаянья. 25 октября 1659 года{% endblock %}
-  {% block container %}
+{% block title %}{% endblock %}
     {% block content %}
       <article>
         <ul>
@@ -16,8 +14,7 @@
           </li>
         </ul>         
         <p>
-          {{ post.text }}
+          {{ post.text|linebreaksbr }}
         </p>          
       </article>
-    {% endblock %} 
-  {% endblock %}
+    {% endblock %}

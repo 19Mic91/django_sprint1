@@ -45,18 +45,21 @@ posts = [
 
 
 def index(request):
-    template_name = 'blog/index.html'
-    context = {'posts': posts[::-1]}
-    return render(request, template_name, context)
+    """Функция отображения постов на главной странице"""
+
+    context = {'posts': reversed(posts)}
+    return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
-    template_name = 'blog/detail.html'
-    context = {'post': posts[id]}
-    return render(request, template_name, context)
+def post_detail(request, post_id):
+    if post_id not in [posts[post_id]['id'] for post_id in range(len(posts))]:
+        raise AssertionError(f'Пост {post_id} не найден')
+    context = {'post': posts[post_id]}
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    template_name = 'blog/category.html'
+    """Функция отображения категорий постов"""
+    
     context = {'slug': category_slug}
-    return render(request, template_name, context)
+    return render(request, 'blog/category.html', context)
