@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 posts = [
@@ -45,19 +46,20 @@ posts = [
 
 
 def index(request):
-    """Функция отображения постов на главной странице"""
+    """Функция отображения постов на главной странице."""
     context = {'posts': reversed(posts)}
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, post_id):
-    if post_id not in [posts[post_id]['id'] for post_id in range(len(posts))]:
-        raise AssertionError(f'Пост {post_id} не найден')
-    context = {'post': posts[post_id]}
+    post_in_posts = {post['id']: post for post in posts}
+    if post_id not in post_in_posts.keys():
+        raise Http404(f"Пост {post_id} не найден")
+    context = {'post': post_in_posts[post_id]}
     return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    """Функция отображения категорий постов"""
+    """Функция отображения категорий постов."""
     context = {'slug': category_slug}
     return render(request, 'blog/category.html', context)
